@@ -1,0 +1,12 @@
+[
+  {
+    "customer_number": "99",
+    "item_number": "11",
+    "prices": [
+      {
+        "quantity": 19,
+        "value": 237.99
+      }
+    ]
+  }
+]
