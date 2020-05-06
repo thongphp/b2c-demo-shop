@@ -8,6 +8,7 @@
 namespace Pyz\Zed\Event;
 
 use Pyz\Zed\ProductStorage\Communication\Plugin\Event\Subscriber\ProductStorageEventSubscriber;
+use Pyz\Zed\Training\Communication\Plugin\Event\Subscriber\TrainingJsonImportSubscriber;
 use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Event\Subscriber\AvailabilityNotificationSubscriber;
 use Spryker\Zed\AvailabilityStorage\Communication\Plugin\Event\Subscriber\AvailabilityStorageEventSubscriber;
 use Spryker\Zed\CategoryImageStorage\Communication\Plugin\Event\Subscriber\CategoryImageStorageEventSubscriber;
@@ -23,6 +24,7 @@ use Spryker\Zed\CustomerAccessStorage\Communication\Plugin\Event\Subscriber\Cust
 use Spryker\Zed\Event\EventDependencyProvider as SprykerEventDependencyProvider;
 use Spryker\Zed\FileManagerStorage\Communication\Plugin\Event\Subscriber\FileManagerStorageSubscriber;
 use Spryker\Zed\GlossaryStorage\Communication\Plugin\Event\Subscriber\GlossaryStorageEventSubscriber;
+use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\NavigationStorage\Communication\Plugin\Event\Subscriber\NavigationStorageEventSubscriber;
 use Spryker\Zed\PriceProductStorage\Communication\Plugin\Event\Subscriber\PriceProductStorageEventSubscriber;
 use Spryker\Zed\ProductAlternativeStorage\Communication\Plugin\Event\Subscriber\ProductAlternativeStorageEventSubscriber;
@@ -51,14 +53,6 @@ use Spryker\Zed\UrlStorage\Communication\Plugin\Event\Subscriber\UrlStorageEvent
 
 class EventDependencyProvider extends SprykerEventDependencyProvider
 {
-    /**
-     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
-     */
-    public function getEventListenerCollection()
-    {
-        return parent::getEventListenerCollection();
-    }
-
     /**
      * @return \Spryker\Zed\Event\Dependency\EventSubscriberCollectionInterface
      */
@@ -116,6 +110,11 @@ class EventDependencyProvider extends SprykerEventDependencyProvider
         $eventSubscriberCollection->add(new ProductConcretePageSearchProductAbstractEventSubscriber());
         $eventSubscriberCollection->add(new ProductConcretePageSearchProductEventSubscriber());
         $eventSubscriberCollection->add(new ProductConcretePageSearchProductLocalizedAttributesEventSubscriber());
+
+        /**
+         * Training
+         */
+        $eventSubscriberCollection->add(new TrainingJsonImportSubscriber());
 
         return $eventSubscriberCollection;
     }

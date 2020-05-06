@@ -22,7 +22,7 @@ class TrainingEntityManagerTest extends Unit
             ->setPrice(12.49);
 
         $entityManager = new TrainingEntityManager();
-        $entityManager->saveTrainingPriceItemEntity($trainingPriceItemTransfer);
+        $entityManager->saveEntity($trainingPriceItemTransfer);
 
         $query = PyzTrainingPriceItemQuery::create()
             ->filterByCustomerNumber('99')

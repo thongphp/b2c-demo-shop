@@ -3,30 +3,36 @@
 namespace Pyz\Zed\Training\Business\Model\Importer;
 
 use Generated\Shared\Transfer\TrainingPriceItemTransfer;
-use Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriterInterface;
+use Pyz\Zed\Training\Dependency\TrainingEvents;
+use Spryker\Zed\Event\Business\EventFacadeInterface;
 
 class JsonImporter implements JsonImporterInterface
 {
-    /** @var \Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriterInterface */
-    private $writer;
+    /** @var \Spryker\Zed\Event\Business\EventFacadeInterface */
+    private $eventFacade;
 
     /**
-     * @param \Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriterInterface $writer
+     * @param \Spryker\Zed\Event\Business\EventFacadeInterface $eventFacade
      */
-    public function __construct(TrainingPriceItemWriterInterface $writer)
+    public function __construct(EventFacadeInterface $eventFacade)
     {
-        $this->writer = $writer;
+        $this->eventFacade = $eventFacade;
     }
 
     /**
      * @param string $path
-     *
-     * @throws \Propel\Runtime\Exception\PropelException|\Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function importData(string $path): void
     {
         $jsonFileContent = file_get_contents($path);
         $data = json_decode($jsonFileContent, true);
+
+        $this->bulkProcess($data);
+    }
+
+    private function bulkProcess(array $data): void
+    {
+        $transfers = [];
 
         foreach ($data as $datum) {
             $prices = $datum['prices'];
@@ -38,8 +44,12 @@ class JsonImporter implements JsonImporterInterface
                 $trainingPriceItemTransfer->setQuantity((int) $price['quantity']);
                 $trainingPriceItemTransfer->setPrice((float) $price['value']);
 
-                $this->writer->saveEntity($trainingPriceItemTransfer);
+                $transfers[] = $trainingPriceItemTransfer;
             }
         }
+
+        $this->eventFacade->triggerBulk(TrainingEvents::DATA_BULK_IMPORT, $transfers);
+
+//        $this->eventFacade->triggerBulk(TrainingStorageEvents::TRAINING_STORAGE_PUBLISH_BULK, $transfers);
     }
 }

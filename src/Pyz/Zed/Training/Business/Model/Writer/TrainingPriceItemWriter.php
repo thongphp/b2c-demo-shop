@@ -7,7 +7,7 @@ use Pyz\Zed\Training\Persistence\TrainingEntityManagerInterface;
 
 class TrainingPriceItemWriter implements TrainingPriceItemWriterInterface
 {
-    /** @var \Pyz\Zed\Training\Persistence\TrainingEntityManager */
+    /** @var \Pyz\Zed\Training\Persistence\TrainingEntityManagerInterface */
     private $entityManager;
 
     /**
@@ -27,6 +27,6 @@ class TrainingPriceItemWriter implements TrainingPriceItemWriterInterface
      */
     public function saveEntity(TrainingPriceItemTransfer $trainingPriceItemTransfer): TrainingPriceItemTransfer
     {
-        return $this->entityManager->saveTrainingPriceItemEntity($trainingPriceItemTransfer);
+        return $this->entityManager->saveEntity($trainingPriceItemTransfer);
     }
 }

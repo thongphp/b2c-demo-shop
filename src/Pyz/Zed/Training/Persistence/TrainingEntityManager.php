@@ -6,6 +6,9 @@ use Generated\Shared\Transfer\PyzTrainingPriceItemEntityTransfer;
 use Generated\Shared\Transfer\TrainingPriceItemTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
+/**
+ * @method \Pyz\Zed\Training\Persistence\TrainingPersistenceFactory getFactory()
+ */
 class TrainingEntityManager extends AbstractEntityManager implements TrainingEntityManagerInterface
 {
     /**
@@ -13,13 +16,24 @@ class TrainingEntityManager extends AbstractEntityManager implements TrainingEnt
      *
      * @return \Generated\Shared\Transfer\TrainingPriceItemTransfer
      */
-    public function saveTrainingPriceItemEntity(TrainingPriceItemTransfer $trainingPriceItemTransfer): TrainingPriceItemTransfer
+    public function saveEntity(TrainingPriceItemTransfer $trainingPriceItemTransfer): TrainingPriceItemTransfer
     {
-        $entity = new PyzTrainingPriceItemEntityTransfer();
-        $entity->fromArray($trainingPriceItemTransfer->toArray());
+        $query = $this->getFactory()
+            ->createTrainingPriceItemQuery();
 
-        $entity = $this->save($entity);
-        $trainingPriceItemTransfer->fromArray($entity->modifiedToArray(), true);
+        $entity = $query->filterByItemNumber($trainingPriceItemTransfer->getItemNumber())
+            ->filterByCustomerNumber($trainingPriceItemTransfer->getCustomerNumber())
+            ->filterByQuantity($trainingPriceItemTransfer->getQuantity())
+            ->findOneOrCreate();
+
+        $entity->setPrice($trainingPriceItemTransfer->getPrice());
+        $entity->save();
+
+//        $entity = new PyzTrainingPriceItemEntityTransfer();
+//        $entity->fromArray($trainingPriceItemTransfer->toArray());
+
+//        $entity = $this->save($entity);
+//        $trainingPriceItemTransfer->fromArray($entity->modifiedToArray(), true);
 
         return $trainingPriceItemTransfer;
     }

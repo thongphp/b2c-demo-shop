@@ -2,6 +2,8 @@
 
 namespace Pyz\Zed\Training\Business;
 
+use Generated\Shared\Transfer\TrainingPriceItemTransfer;
+
 interface TrainingFacadeInterface
 {
     /**
@@ -14,14 +16,21 @@ interface TrainingFacadeInterface
     /**
      * @param string $customerNumber
      *
-     * @return null|\Generated\Shared\Transfer\TrainingPriceItemTransfer[]
+     * @return \Generated\Shared\Transfer\TrainingPriceItemTransfer[]
      */
-    public function findPricesByCustomerNumber(string $customerNumber): ?array;
+    public function findPricesByCustomerNumber(string $customerNumber): array;
 
     /**
      * @param string $itemNumber
      *
-     * @return null|\Generated\Shared\Transfer\TrainingPriceItemTransfer[]
+     * @return \Generated\Shared\Transfer\TrainingPriceItemTransfer[]
      */
-    public function findPricesByItemNumber(string $itemNumber): ?array;
+    public function findPricesByItemNumber(string $itemNumber): array;
+
+    /**
+     * @param \Generated\Shared\Transfer\TrainingPriceItemTransfer $trainingPriceItemTransfer
+     *
+     * @return \Generated\Shared\Transfer\TrainingPriceItemTransfer
+     */
+    public function savePriceItem(TrainingPriceItemTransfer $trainingPriceItemTransfer): TrainingPriceItemTransfer;
 }
