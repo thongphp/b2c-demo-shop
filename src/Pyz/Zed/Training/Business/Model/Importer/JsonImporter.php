@@ -1,17 +1,17 @@
 <?php declare(strict_types = 1);
 
-namespace Pyz\Zed\Training\Business\Model;
+namespace Pyz\Zed\Training\Business\Model\Importer;
 
 use Generated\Shared\Transfer\TrainingPriceItemTransfer;
-use Pyz\Zed\Training\Business\Writer\TrainingPriceItemWriterInterface;
+use Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriterInterface;
 
-class JsonImporter
+class JsonImporter implements JsonImporterInterface
 {
-    /** @var \Pyz\Zed\Training\Business\Writer\TrainingPriceItemWriterInterface */
+    /** @var \Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriterInterface */
     private $writer;
 
     /**
-     * @param \Pyz\Zed\Training\Business\Writer\TrainingPriceItemWriterInterface $writer
+     * @param \Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriterInterface $writer
      */
     public function __construct(TrainingPriceItemWriterInterface $writer)
     {

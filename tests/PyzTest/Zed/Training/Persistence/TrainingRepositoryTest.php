@@ -3,7 +3,7 @@
 namespace PyzTest\Zed\Training\Persistence;
 
 use Codeception\Test\Unit;
-use Orm\Zed\Training\Persistence\PyzTrainingPriceItem;
+use Generated\Shared\Transfer\TrainingPriceItemTransfer;
 use Pyz\Zed\Training\Persistence\TrainingRepository;
 
 class TrainingRepositoryTest extends Unit
@@ -50,7 +50,7 @@ class TrainingRepositoryTest extends Unit
 
         $results = $this->repository->findByCustomerNumber($customerNumber);
 
-        $this->assertContainsOnlyInstancesOf(PyzTrainingPriceItem::class, $results);
+        $this->assertContainsOnlyInstancesOf(TrainingPriceItemTransfer::class, $results);
         $this->assertCount($expectedCount, $results);
     }
 
@@ -83,7 +83,7 @@ class TrainingRepositoryTest extends Unit
 
         $results = $this->repository->findByItemNumber($itemNumber);
 
-        $this->assertContainsOnlyInstancesOf(PyzTrainingPriceItem::class, $results);
+        $this->assertContainsOnlyInstancesOf(TrainingPriceItemTransfer::class, $results);
         $this->assertCount($expectedCount, $results);
     }
 

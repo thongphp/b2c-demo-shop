@@ -10,18 +10,18 @@ interface TrainingRepositoryInterface
     /**
      * @param string $productId
      *
-     * @return array|null
+     * @return \Generated\Shared\Transfer\TrainingPriceItemTransfer[]
      *
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
-    public function findByItemNumber(string $productId): ?array;
+    public function findByItemNumber(string $productId): array;
 
     /**
      * @param string $customerNumber
      *
-     * @return array|null
+     * @return \Generated\Shared\Transfer\TrainingPriceItemTransfer[]
      *
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
-    public function findByCustomerNumber(string $customerNumber): ?array;
+    public function findByCustomerNumber(string $customerNumber): array;
 }

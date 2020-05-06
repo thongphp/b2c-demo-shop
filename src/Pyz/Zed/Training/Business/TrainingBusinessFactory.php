@@ -2,11 +2,12 @@
 
 namespace Pyz\Zed\Training\Business;
 
-use Pyz\Zed\Training\Business\Model\JsonImporter;
-use Pyz\Zed\Training\Business\Reader\TrainingPriceItemReader;
-use Pyz\Zed\Training\Business\Reader\TrainingPriceItemReaderInterface;
-use Pyz\Zed\Training\Business\Writer\TrainingPriceItemWriter;
-use Pyz\Zed\Training\Business\Writer\TrainingPriceItemWriterInterface;
+use Pyz\Zed\Training\Business\Model\Importer\JsonImporter;
+use Pyz\Zed\Training\Business\Model\Importer\JsonImporterInterface;
+use Pyz\Zed\Training\Business\Model\Reader\TrainingPriceItemReader;
+use Pyz\Zed\Training\Business\Model\Reader\TrainingPriceItemReaderInterface;
+use Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriter;
+use Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriterInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -16,15 +17,15 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 class TrainingBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return \Pyz\Zed\Training\Business\Model\JsonImporter
+     * @return JsonImporterInterface
      */
-    public function createDataImportFromJson(): JsonImporter
+    public function createDataImportFromJson(): JsonImporterInterface
     {
         return new JsonImporter($this->createPriceItemWriter());
     }
 
     /**
-     * @return \Pyz\Zed\Training\Business\Writer\TrainingPriceItemWriterInterface
+     * @return \Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriterInterface
      */
     private function createPriceItemWriter(): TrainingPriceItemWriterInterface
     {
@@ -32,7 +33,7 @@ class TrainingBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \Pyz\Zed\Training\Business\Reader\TrainingPriceItemReaderInterface
+     * @return \Pyz\Zed\Training\Business\Model\Reader\TrainingPriceItemReaderInterface
      */
     public function createPriceItemReader(): TrainingPriceItemReaderInterface
     {
