@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Pyz\Zed\Training\Business\Reader;
+namespace Pyz\Zed\Training\Business\Model\Reader;
 
 interface TrainingPriceItemReaderInterface
 {

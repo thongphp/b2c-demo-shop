@@ -10,6 +10,9 @@ use Pyz\Zed\Training\Persistence\TrainingEntityManager;
 
 class TrainingEntityManagerTest extends Unit
 {
+    /**
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     */
     public function testSaveEntity(): void
     {
         $trainingPriceItemTransfer = new TrainingPriceItemTransfer();

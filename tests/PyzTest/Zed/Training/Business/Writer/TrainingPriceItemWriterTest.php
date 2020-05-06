@@ -4,17 +4,17 @@ namespace PyzTest\Zed\Training\Business\Writer;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\TrainingPriceItemTransfer;
-use Pyz\Zed\Training\Business\Writer\TrainingPriceItemWriter;
 use Pyz\Zed\Training\Persistence\TrainingEntityManager;
 
 class TrainingPriceItemWriterTest extends Unit
 {
-    /** @var \PyzTest\Zed\Training\TrainingPersistenceTester */
-    protected $tester;
-
+    /**
+     * @throws \Propel\Runtime\Exception\PropelException
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
+     */
     public function testSaveEntity(): void
     {
-        $writer = new TrainingPriceItemWriter(new TrainingEntityManager());
+        $writer = new \Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriter(new TrainingEntityManager());
 
         $trainingPriceItemTransfer = new TrainingPriceItemTransfer();
         $trainingPriceItemTransfer->setCustomerNumber('99')

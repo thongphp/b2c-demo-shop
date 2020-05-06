@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Pyz\Zed\Training\Business\Writer;
+namespace Pyz\Zed\Training\Business\Model\Writer;
 
 use Generated\Shared\Transfer\TrainingPriceItemTransfer;
 

@@ -1,8 +1,7 @@
 <?php declare(strict_types = 1);
 
-namespace Pyz\Zed\Training\Business\Reader;
+namespace Pyz\Zed\Training\Business\Model\Reader;
 
-use Generated\Shared\Transfer\TrainingPriceItemTransfer;
 use Pyz\Zed\Training\Persistence\TrainingRepositoryInterface;
 
 class TrainingPriceItemReader implements TrainingPriceItemReaderInterface
@@ -28,21 +27,12 @@ class TrainingPriceItemReader implements TrainingPriceItemReaderInterface
     public function findByCustomerNumber(string $customerNumber): array
     {
         $entities = $this->repository->findByCustomerNumber($customerNumber);
-        $results = [];
 
         if (null === $entities) {
-            return $results;
+            return [];
         }
 
-        foreach ($entities as $entity) {
-            /** @var \Orm\Zed\Training\Persistence\PyzTrainingPriceItem $entity */
-            $trainingPriceItemTransfer = new TrainingPriceItemTransfer();
-            $trainingPriceItemTransfer->fromArray($entity->toArray(), true);
-
-            $results[] = $trainingPriceItemTransfer;
-        }
-
-        return $results;
+        return $entities;
     }
 
     /**
@@ -55,20 +45,11 @@ class TrainingPriceItemReader implements TrainingPriceItemReaderInterface
     public function findByItemNumber(string $itemNumber): array
     {
         $entities = $this->repository->findByItemNumber($itemNumber);
-        $results = [];
 
         if (null === $entities) {
-            return $results;
+            return [];
         }
 
-        foreach ($entities as $entity) {
-            /** @var \Orm\Zed\Training\Persistence\PyzTrainingPriceItem $entity */
-            $trainingPriceItemTransfer = new TrainingPriceItemTransfer();
-            $trainingPriceItemTransfer->fromArray($entity->toArray(), true);
-
-            $results[] = $trainingPriceItemTransfer;
-        }
-
-        return $results;
+        return $entities;
     }
 }
