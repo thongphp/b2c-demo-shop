@@ -2,9 +2,13 @@
 
 namespace Pyz\Zed\TrainingStorage\Business;
 
+use Generated\Shared\Transfer\TrainingPriceItemTransfer;
 use Generated\Shared\Transfer\TrainingStorageItemTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
+/**
+ * @method \Pyz\Zed\TrainingStorage\Business\TrainingStorageBusinessFactory getFactory()
+ */
 class TrainingStorageFacade extends AbstractFacade implements TrainingStorageFacadeInterface
 {
     /**
@@ -12,15 +16,30 @@ class TrainingStorageFacade extends AbstractFacade implements TrainingStorageFac
      */
     public function publish(array $transfers): void
     {
-        dump($transfers);
-        exit;
-        $data = $this->prepareData($transfers);
+        $storageItemTransfers = $this->prepareData($transfers);
+
+        foreach ($storageItemTransfers as $storageItemTransfer) {
+            $this->saveData($storageItemTransfer);
+        }
     }
 
     /**
-     * @param \Generated\Shared\Transfer\TrainingStorageItemTransfer[] $transfers
+     * @param \Generated\Shared\Transfer\TrainingStorageItemTransfer $storageItemTransfer
+     */
+    private function saveData(TrainingStorageItemTransfer $storageItemTransfer): void
+    {
+        $customerItemNumber = $this->generateKeyForStorage($storageItemTransfer);
+
+        $writer = $this->getFactory()->createWriter();
+
+        $writer->deleteEntitiesByCustomerItemNumber($customerItemNumber);
+        $writer->saveStorageItem($storageItemTransfer);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\TrainingPriceItemTransfer[] $transfers
      *
-     * @return array
+     * @return TrainingStorageItemTransfer[]
      */
     private function prepareData(array $transfers): array
     {
@@ -30,14 +49,40 @@ class TrainingStorageFacade extends AbstractFacade implements TrainingStorageFac
             $customerNumber = $transfer->getCustomerNumber();
             $itemNumber = $transfer->getItemNumber();
             $key = $this->generateKey($transfer);
-            dump($transfer);
+
+            if (!isset($results[$key])) {
+                $results[$key] = [
+                    'customerNumber' => $customerNumber,
+                    'itemNumber' => $itemNumber,
+                    'prices' => [],
+                ];
+            }
+
+            $results[$key]['prices'][] = [
+                'quantity' => $transfer->getQuantity(),
+                'value' => $transfer->getPrice(),
+            ];
         }
 
-        return $results;
+        $results = array_map(function ($item) {
+            $storageItemTransfer = new TrainingStorageItemTransfer();
+            $storageItemTransfer->setCustomerNumber($item['customerNumber'])
+                ->setItemNumber($item['itemNumber'])
+                ->setPrices($item['prices']);
+
+            return $storageItemTransfer;
+        }, $results);
+
+        return array_values($results);
     }
 
-    private function generateKey(TrainingStorageItemTransfer $storageItemTransfer): string
+    private function generateKey(TrainingPriceItemTransfer $trainingPriceItemTransfer): string
     {
-        return $storageItemTransfer->getCustomerNumber() . '_' . $storageItemTransfer->getItemNumber();
+        return $trainingPriceItemTransfer->getCustomerNumber() . '_' . $trainingPriceItemTransfer->getItemNumber();
+    }
+
+    private function generateKeyForStorage(TrainingStorageItemTransfer $itemTransfer): string
+    {
+        return $itemTransfer->getCustomerNumber() . '_' . $itemTransfer->getItemNumber();
     }
 }

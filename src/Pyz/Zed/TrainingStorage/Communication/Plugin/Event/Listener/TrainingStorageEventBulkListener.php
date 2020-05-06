@@ -15,7 +15,6 @@ class TrainingStorageEventBulkListener extends AbstractPlugin implements EventBu
      */
     public function handleBulk(array $transfers, $eventName): void
     {
-        dump($transfers);
         $this->getFacade()->publish($transfers);
     }
 }

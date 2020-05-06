@@ -53,11 +53,10 @@ class TrainingFacade extends AbstractFacade implements TrainingFacadeInterface
     /**
      * @param \Generated\Shared\Transfer\TrainingPriceItemTransfer $trainingPriceItemTransfer
      *
-     * @return \Generated\Shared\Transfer\TrainingPriceItemTransfer
      * @throws \Propel\Runtime\Exception\PropelException
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
-    public function savePriceItem(TrainingPriceItemTransfer $trainingPriceItemTransfer): TrainingPriceItemTransfer
+    public function savePriceItem(TrainingPriceItemTransfer $trainingPriceItemTransfer): void
     {
         $this->getFactory()->createPriceItemWriter()->saveEntity($trainingPriceItemTransfer);
     }

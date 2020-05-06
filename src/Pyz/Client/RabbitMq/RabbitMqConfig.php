@@ -58,7 +58,7 @@ class RabbitMqConfig extends SprykerRabbitMqConfig
         $queueOptionCollection->append($this->createQueueOption(TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_QUEUE, TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_ERROR_QUEUE));
         $queueOptionCollection->append($this->createQueueOption(ContentStorageConfig::CONTENT_SYNC_STORAGE_QUEUE, ContentStorageConfig::CONTENT_SYNC_STORAGE_ERROR_QUEUE));
 
-//        $queueOptionCollection->append($this->createQueueOption(TrainingStorageConstants::SYNC_STORAGE_TRAINING_QUEUE, TrainingStorageConstants::SYNC_STORAGE_TRAINING_QUEUE_ERROR));
+        $queueOptionCollection->append($this->createQueueOption(TrainingStorageConstants::SYNC_STORAGE_TRAINING_QUEUE, TrainingStorageConstants::SYNC_STORAGE_TRAINING_QUEUE_ERROR));
 
         $queueOptionCollection->append(
             $this->createQueueOption(

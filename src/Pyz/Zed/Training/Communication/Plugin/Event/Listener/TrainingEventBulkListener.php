@@ -10,7 +10,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 /**
  * @method \Pyz\Zed\Training\Business\TrainingFacadeInterface getFacade()
  */
-class TrainingEventListener extends AbstractPlugin implements EventBulkHandlerInterface
+class TrainingEventBulkListener extends AbstractPlugin implements EventBulkHandlerInterface
 {
     /**
      * @param \Spryker\Shared\Kernel\Transfer\TransferInterface[] $transfers

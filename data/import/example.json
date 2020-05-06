@@ -38,6 +38,10 @@
       {
         "quantity": 50,
         "value": 49.99
+      },
+      {
+        "quantity": 100,
+        "value": 39.99
       }
     ]
   }

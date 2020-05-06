@@ -62,7 +62,7 @@ class QueueDependencyProvider extends SprykerDependencyProvider
             TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             ContentStorageConfig::CONTENT_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
-//            TrainingStorageConstants::SYNC_STORAGE_TRAINING_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
+            TrainingStorageConstants::SYNC_STORAGE_TRAINING_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
         ];
     }
 }

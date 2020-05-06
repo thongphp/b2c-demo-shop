@@ -29,8 +29,6 @@ interface TrainingFacadeInterface
 
     /**
      * @param \Generated\Shared\Transfer\TrainingPriceItemTransfer $trainingPriceItemTransfer
-     *
-     * @return \Generated\Shared\Transfer\TrainingPriceItemTransfer
      */
-    public function savePriceItem(TrainingPriceItemTransfer $trainingPriceItemTransfer): TrainingPriceItemTransfer;
+    public function savePriceItem(TrainingPriceItemTransfer $trainingPriceItemTransfer): void;
 }

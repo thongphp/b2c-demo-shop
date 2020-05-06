@@ -2,7 +2,6 @@
 
 namespace Pyz\Zed\Training\Persistence;
 
-use Generated\Shared\Transfer\PyzTrainingPriceItemEntityTransfer;
 use Generated\Shared\Transfer\TrainingPriceItemTransfer;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
 
@@ -15,6 +14,8 @@ class TrainingEntityManager extends AbstractEntityManager implements TrainingEnt
      * @param \Generated\Shared\Transfer\TrainingPriceItemTransfer $trainingPriceItemTransfer
      *
      * @return \Generated\Shared\Transfer\TrainingPriceItemTransfer
+     * @throws \Propel\Runtime\Exception\PropelException
+     * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function saveEntity(TrainingPriceItemTransfer $trainingPriceItemTransfer): TrainingPriceItemTransfer
     {
@@ -29,11 +30,7 @@ class TrainingEntityManager extends AbstractEntityManager implements TrainingEnt
         $entity->setPrice($trainingPriceItemTransfer->getPrice());
         $entity->save();
 
-//        $entity = new PyzTrainingPriceItemEntityTransfer();
-//        $entity->fromArray($trainingPriceItemTransfer->toArray());
-
-//        $entity = $this->save($entity);
-//        $trainingPriceItemTransfer->fromArray($entity->modifiedToArray(), true);
+        $trainingPriceItemTransfer->fromArray($entity->toArray(), true);
 
         return $trainingPriceItemTransfer;
     }

@@ -17,8 +17,8 @@ class TrainingStorageEventSubscriber extends AbstractPlugin implements EventSubs
      */
     public function getSubscribedEvents(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
-        $eventCollection->addListener(
-            TrainingStorageEvents::TRAINING_STORAGE_PUBLISH_BULK,
+        $eventCollection->addListenerQueued(
+            TrainingStorageEvents::DATA_BULK_PUBLISH,
             new TrainingStorageEventBulkListener()
         );
 

@@ -1,14 +1,14 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Pyz\Zed\Training\Communication\Plugin\Event\Subscriber;
 
-use Pyz\Zed\Training\Communication\Plugin\Event\Listener\TrainingEventListener;
+use Pyz\Zed\Training\Communication\Plugin\Event\Listener\TrainingEventBulkListener;
 use Pyz\Zed\Training\Dependency\TrainingEvents;
 use Spryker\Zed\Event\Dependency\EventCollectionInterface;
 use Spryker\Zed\Event\Dependency\Plugin\EventSubscriberInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
-class TrainingJsonImportSubscriber extends AbstractPlugin implements EventSubscriberInterface
+class TrainingEventSubscriber extends AbstractPlugin implements EventSubscriberInterface
 {
     /**
      * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
@@ -17,9 +17,9 @@ class TrainingJsonImportSubscriber extends AbstractPlugin implements EventSubscr
      */
     public function getSubscribedEvents(EventCollectionInterface $eventCollection): EventCollectionInterface
     {
-        $eventCollection->addListener(
+        $eventCollection->addListenerQueued(
             TrainingEvents::DATA_BULK_IMPORT,
-            new TrainingEventListener()
+            new TrainingEventBulkListener()
         );
 
         return $eventCollection;

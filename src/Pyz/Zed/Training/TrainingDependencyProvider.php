@@ -2,6 +2,7 @@
 
 namespace Pyz\Zed\Training;
 
+use Pyz\Zed\Training\Dependency\Facade\TrainingToEventBridge;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;
 
@@ -31,7 +32,7 @@ class TrainingDependencyProvider extends AbstractBundleDependencyProvider
     private function addEventFacade(Container $container): Container
     {
         $container[static::FACADE_EVENT] = function (Container $container) {
-            return $container->getLocator()->event()->facade();
+            return new TrainingToEventBridge($container->getLocator()->event()->facade());
         };
 
         return $container;

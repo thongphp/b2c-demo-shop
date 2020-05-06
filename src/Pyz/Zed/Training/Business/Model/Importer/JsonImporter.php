@@ -3,18 +3,21 @@
 namespace Pyz\Zed\Training\Business\Model\Importer;
 
 use Generated\Shared\Transfer\TrainingPriceItemTransfer;
+use Pyz\Shared\TrainingStorage\TrainingStorageEvents;
+use Pyz\Zed\Training\Dependency\Facade\TrainingToEventBridgeInterface;
 use Pyz\Zed\Training\Dependency\TrainingEvents;
-use Spryker\Zed\Event\Business\EventFacadeInterface;
 
 class JsonImporter implements JsonImporterInterface
 {
-    /** @var \Spryker\Zed\Event\Business\EventFacadeInterface */
+    /** @var \Pyz\Zed\Training\Dependency\Facade\TrainingToEventBridgeInterface */
     private $eventFacade;
 
     /**
-     * @param \Spryker\Zed\Event\Business\EventFacadeInterface $eventFacade
+     * JsonImporter constructor.
+     *
+     * @param \Pyz\Zed\Training\Dependency\Facade\TrainingToEventBridgeInterface $eventFacade
      */
-    public function __construct(EventFacadeInterface $eventFacade)
+    public function __construct(TrainingToEventBridgeInterface $eventFacade)
     {
         $this->eventFacade = $eventFacade;
     }
@@ -41,15 +44,14 @@ class JsonImporter implements JsonImporterInterface
                 $trainingPriceItemTransfer = new TrainingPriceItemTransfer();
                 $trainingPriceItemTransfer->setCustomerNumber($datum['customer_number']);
                 $trainingPriceItemTransfer->setItemNumber($datum['item_number']);
-                $trainingPriceItemTransfer->setQuantity((int) $price['quantity']);
-                $trainingPriceItemTransfer->setPrice((float) $price['value']);
+                $trainingPriceItemTransfer->setQuantity((int)$price['quantity']);
+                $trainingPriceItemTransfer->setPrice((float)$price['value']);
 
                 $transfers[] = $trainingPriceItemTransfer;
             }
         }
 
         $this->eventFacade->triggerBulk(TrainingEvents::DATA_BULK_IMPORT, $transfers);
-
-//        $this->eventFacade->triggerBulk(TrainingStorageEvents::TRAINING_STORAGE_PUBLISH_BULK, $transfers);
+        $this->eventFacade->triggerBulk(TrainingStorageEvents::DATA_BULK_PUBLISH, $transfers);
     }
 }

@@ -8,7 +8,8 @@
 namespace Pyz\Zed\Event;
 
 use Pyz\Zed\ProductStorage\Communication\Plugin\Event\Subscriber\ProductStorageEventSubscriber;
-use Pyz\Zed\Training\Communication\Plugin\Event\Subscriber\TrainingJsonImportSubscriber;
+use Pyz\Zed\Training\Communication\Plugin\Event\Subscriber\TrainingEventSubscriber;
+use Pyz\Zed\TrainingStorage\Communication\Plugin\Event\Subscriber\TrainingStorageEventSubscriber;
 use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Event\Subscriber\AvailabilityNotificationSubscriber;
 use Spryker\Zed\AvailabilityStorage\Communication\Plugin\Event\Subscriber\AvailabilityStorageEventSubscriber;
 use Spryker\Zed\CategoryImageStorage\Communication\Plugin\Event\Subscriber\CategoryImageStorageEventSubscriber;
@@ -24,7 +25,6 @@ use Spryker\Zed\CustomerAccessStorage\Communication\Plugin\Event\Subscriber\Cust
 use Spryker\Zed\Event\EventDependencyProvider as SprykerEventDependencyProvider;
 use Spryker\Zed\FileManagerStorage\Communication\Plugin\Event\Subscriber\FileManagerStorageSubscriber;
 use Spryker\Zed\GlossaryStorage\Communication\Plugin\Event\Subscriber\GlossaryStorageEventSubscriber;
-use Spryker\Zed\Kernel\Container;
 use Spryker\Zed\NavigationStorage\Communication\Plugin\Event\Subscriber\NavigationStorageEventSubscriber;
 use Spryker\Zed\PriceProductStorage\Communication\Plugin\Event\Subscriber\PriceProductStorageEventSubscriber;
 use Spryker\Zed\ProductAlternativeStorage\Communication\Plugin\Event\Subscriber\ProductAlternativeStorageEventSubscriber;
@@ -114,7 +114,8 @@ class EventDependencyProvider extends SprykerEventDependencyProvider
         /**
          * Training
          */
-        $eventSubscriberCollection->add(new TrainingJsonImportSubscriber());
+        $eventSubscriberCollection->add(new TrainingEventSubscriber());
+        $eventSubscriberCollection->add(new TrainingStorageEventSubscriber());
 
         return $eventSubscriberCollection;
     }
