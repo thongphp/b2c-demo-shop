@@ -13,6 +13,8 @@ interface TrainingFacadeInterface
      */
     public function importDataFromJson(string $path): void;
 
+    public function import(): void;
+
     /**
      * @param string $customerNumber
      *

@@ -4,6 +4,7 @@ namespace Pyz\Zed\Training\Business;
 
 use Pyz\Zed\Training\Business\Model\Importer\JsonImporter;
 use Pyz\Zed\Training\Business\Model\Importer\JsonImporterInterface;
+use Pyz\Zed\Training\Business\Model\Importer\TrainingImporter;
 use Pyz\Zed\Training\Business\Model\Reader\PriceItemReader;
 use Pyz\Zed\Training\Business\Model\Reader\PriceItemReaderInterface;
 use Pyz\Zed\Training\Business\Model\Writer\PriceItemWriter;
@@ -37,6 +38,26 @@ class TrainingBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
+     * @return \Pyz\Zed\Training\Business\Model\Writer\PriceItemWriterInterface
+     */
+    public function createPriceItemWriter(): PriceItemWriterInterface
+    {
+        return new PriceItemWriter($this->getEntityManager());
+    }
+
+    /**
+     * @return \Pyz\Zed\Training\Business\Model\Importer\TrainingImporter
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
+     */
+    public function createImporter(): TrainingImporter
+    {
+        return new TrainingImporter(
+            $this->getEventFacade(),
+            $this->getProvidedDependency(TrainingDependencyProvider::PLUGIN_IMPORT_COLLECTION)
+        );
+    }
+
+    /**
      * @return \Pyz\Zed\Training\Dependency\Facade\TrainingToEventBridgeInterface
      *
      * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
@@ -44,13 +65,5 @@ class TrainingBusinessFactory extends AbstractBusinessFactory
     public function getEventFacade(): TrainingToEventBridgeInterface
     {
         return $this->getProvidedDependency(TrainingDependencyProvider::FACADE_EVENT);
-    }
-
-    /**
-     * @return \Pyz\Zed\Training\Business\Model\Writer\PriceItemWriterInterface
-     */
-    public function createPriceItemWriter(): PriceItemWriterInterface
-    {
-        return new PriceItemWriter($this->getEntityManager());
     }
 }

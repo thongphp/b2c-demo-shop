@@ -22,6 +22,11 @@ class TrainingFacade extends AbstractFacade implements TrainingFacadeInterface
         $this->getFactory()->createDataImportFromJson()->importData($path);
     }
 
+    public function import(): void
+    {
+        $this->getFactory()->createImporter()->import();
+    }
+
     /**
      * @param string $customerNumber
      *

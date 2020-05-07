@@ -15,6 +15,7 @@ use Pyz\Zed\PriceProductScheduleDataImport\PriceProductScheduleDataImportConfig;
 use Pyz\Zed\ProductQuantityDataImport\ProductQuantityDataImportConfig;
 use Pyz\Zed\Training\Communication\Console\TrainingDataFindConsole;
 use Pyz\Zed\Training\Communication\Console\TrainingDataImportConsole;
+use Pyz\Zed\Training\Communication\Console\TrainingImportConsole;
 use Spryker\Shared\Config\Environment;
 use Spryker\Zed\Cache\Communication\Console\EmptyAllCachesConsole;
 use Spryker\Zed\CategoryDataImport\CategoryDataImportConfig;
@@ -297,6 +298,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
 
             new TrainingDataImportConsole(),
             new TrainingDataFindConsole(),
+            new TrainingImportConsole(),
         ];
 
         $propelCommands = $container->getLocator()->propel()->facade()->getConsoleCommands();
