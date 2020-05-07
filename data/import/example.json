@@ -44,5 +44,23 @@
         "value": 39.99
       }
     ]
+  },
+  {
+    "customer_number": "40",
+    "item_number": "25",
+    "prices": [
+      {
+        "quantity": 100,
+        "value": 19.99
+      },
+      {
+        "quantity": 500,
+        "value": 14.99
+      },
+      {
+        "quantity": 1000,
+        "value": 10.99
+      }
+    ]
   }
 ]

@@ -32,6 +32,7 @@ class TrainingStorageItemWriter implements TrainingStorageItemWriterInterface
      * @param \Generated\Shared\Transfer\TrainingStorageItemTransfer $storageItemTransfer
      *
      * @return \Generated\Shared\Transfer\TrainingStorageItemTransfer
+     * @throws \Propel\Runtime\Exception\PropelException
      */
     public function saveStorageItem(TrainingStorageItemTransfer $storageItemTransfer): TrainingStorageItemTransfer
     {

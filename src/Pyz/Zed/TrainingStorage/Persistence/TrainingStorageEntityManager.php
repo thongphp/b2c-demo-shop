@@ -36,6 +36,7 @@ class TrainingStorageEntityManager extends AbstractEntityManager implements Trai
         $entity->setData($storageItemTransfer->toArray());
         $entity->setFkCustomerItemNumber($customerItemNumber);
         $entity->setKey($customerItemNumber);
+        $entity->setIsSendingToQueue(true);
         $entity->save();
 
         return $storageItemTransfer;

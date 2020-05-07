@@ -9,7 +9,7 @@
         <column name="fk_customer_item_number" type="varchar" size="25" required="true" />
         <id-method-parameter value="pyz_training_price_item_storage_pk_seq" />
         <behavior name="synchronization">
-            <parameter name="resource" value="pyz_training_price_item" />
+            <parameter name="resource" value="training" />
             <parameter name="key_suffix_column" value="fk_customer_item_number" />
             <parameter name="queue_group" value="sync.storage.training" />
         </behavior>
