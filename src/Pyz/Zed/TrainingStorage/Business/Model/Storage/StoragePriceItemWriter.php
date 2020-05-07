@@ -5,7 +5,7 @@ namespace Pyz\Zed\TrainingStorage\Business\Model\Storage;
 use Generated\Shared\Transfer\TrainingStorageItemTransfer;
 use Pyz\Zed\TrainingStorage\Persistence\TrainingStorageEntityManagerInterface;
 
-class StoragePricePriceItemWriter implements StoragePriceItemWriterInterface
+class StoragePriceItemWriter implements StoragePriceItemWriterInterface
 {
     /** @var TrainingStorageEntityManagerInterface */
     private $entityManager;
