@@ -5,7 +5,7 @@ namespace Pyz\Zed\Training\Business\Model\Writer;
 use Generated\Shared\Transfer\TrainingPriceItemTransfer;
 use Pyz\Zed\Training\Persistence\TrainingEntityManagerInterface;
 
-class TrainingPriceItemWriter implements TrainingPriceItemWriterInterface
+class PriceItemWriter implements PriceItemWriterInterface
 {
     /** @var \Pyz\Zed\Training\Persistence\TrainingEntityManagerInterface */
     private $entityManager;

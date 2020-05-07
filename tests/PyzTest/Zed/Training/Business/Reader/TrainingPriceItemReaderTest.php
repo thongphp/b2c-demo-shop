@@ -4,7 +4,7 @@ namespace PyzTest\Zed\Training\Business\Reader;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\TrainingPriceItemTransfer;
-use Pyz\Zed\Training\Business\Model\Reader\TrainingPriceItemReader;
+use Pyz\Zed\Training\Business\Model\Reader\PriceItemReader;
 use Pyz\Zed\Training\Persistence\TrainingRepository;
 
 class TrainingPriceItemReaderTest extends Unit
@@ -42,7 +42,7 @@ class TrainingPriceItemReaderTest extends Unit
     {
         $this->prepareData();
 
-        $trainingPriceItemReader = new TrainingPriceItemReader(new TrainingRepository());
+        $trainingPriceItemReader = new PriceItemReader(new TrainingRepository());
 
         $prices = $trainingPriceItemReader->findByCustomerNumber($customerNumber);
 
@@ -80,7 +80,7 @@ class TrainingPriceItemReaderTest extends Unit
     {
         $this->prepareData();
 
-        $trainingPriceItemReader = new TrainingPriceItemReader(new TrainingRepository());
+        $trainingPriceItemReader = new PriceItemReader(new TrainingRepository());
 
         $prices = $trainingPriceItemReader->findByItemNumber($itemNumber);
 

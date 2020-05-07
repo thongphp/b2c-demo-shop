@@ -32,7 +32,7 @@ class TrainingStorageFacade extends AbstractFacade implements TrainingStorageFac
 
         $writer = $this->getFactory()->createWriter();
 
-        $writer->deleteEntitiesByCustomerItemNumber($customerItemNumber);
+//        $writer->deleteEntitiesByCustomerItemNumber($customerItemNumber);
         $writer->saveStorageItem($storageItemTransfer);
     }
 

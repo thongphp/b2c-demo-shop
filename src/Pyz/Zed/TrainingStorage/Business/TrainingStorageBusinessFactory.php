@@ -2,22 +2,24 @@
 
 namespace Pyz\Zed\TrainingStorage\Business;
 
-use Pyz\Zed\TrainingStorage\Business\Model\Writer\TrainingStorageItemWriter;
-use Pyz\Zed\TrainingStorage\Business\Model\Writer\TrainingStorageItemWriterInterface;
+use Pyz\Zed\TrainingStorage\Business\Model\Storage\StoragePricePriceItemWriter;
+use Pyz\Zed\TrainingStorage\Business\Model\Storage\StoragePriceItemWriterInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
  * @method \Pyz\Zed\TrainingStorage\Persistence\TrainingStorageEntityManager getEntityManager()
+ * @method \Pyz\Zed\TrainingStorage\TrainingStorageConfig getConfig()
  */
 class TrainingStorageBusinessFactory extends AbstractBusinessFactory
 {
     /**
-     * @return TrainingStorageItemWriterInterface
+     * @return StoragePriceItemWriterInterface
      */
-    public function createWriter(): TrainingStorageItemWriterInterface
+    public function createWriter(): StoragePriceItemWriterInterface
     {
-        return new TrainingStorageItemWriter(
-            $this->getEntityManager()
+        return new StoragePricePriceItemWriter(
+            $this->getEntityManager(),
+            $this->getConfig()->isSendingToQueue()
         );
     }
 }

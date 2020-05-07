@@ -1,16 +1,11 @@
 <?php declare(strict_types = 1);
 
-namespace Pyz\Zed\TrainingStorage\Business\Model\Writer;
+namespace Pyz\Zed\TrainingStorage\Business\Model\Storage;
 
 use Generated\Shared\Transfer\TrainingStorageItemTransfer;
 
-interface TrainingStorageItemWriterInterface
+interface StoragePriceItemWriterInterface
 {
-    /**
-     * @param string $customerItemNumber
-     */
-    public function deleteEntitiesByCustomerItemNumber(string $customerItemNumber): void;
-
     /**
      * @param \Generated\Shared\Transfer\TrainingStorageItemTransfer $storageItemTransfer
      *

@@ -4,7 +4,7 @@ namespace Pyz\Zed\Training\Business\Model\Reader;
 
 use Pyz\Zed\Training\Persistence\TrainingRepositoryInterface;
 
-class TrainingPriceItemReader implements TrainingPriceItemReaderInterface
+class PriceItemReader implements PriceItemReaderInterface
 {
     /** @var \Pyz\Zed\Training\Persistence\TrainingRepositoryInterface */
     private $repository;

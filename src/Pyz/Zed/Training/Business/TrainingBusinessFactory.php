@@ -4,10 +4,10 @@ namespace Pyz\Zed\Training\Business;
 
 use Pyz\Zed\Training\Business\Model\Importer\JsonImporter;
 use Pyz\Zed\Training\Business\Model\Importer\JsonImporterInterface;
-use Pyz\Zed\Training\Business\Model\Reader\TrainingPriceItemReader;
-use Pyz\Zed\Training\Business\Model\Reader\TrainingPriceItemReaderInterface;
-use Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriter;
-use Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriterInterface;
+use Pyz\Zed\Training\Business\Model\Reader\PriceItemReader;
+use Pyz\Zed\Training\Business\Model\Reader\PriceItemReaderInterface;
+use Pyz\Zed\Training\Business\Model\Writer\PriceItemWriter;
+use Pyz\Zed\Training\Business\Model\Writer\PriceItemWriterInterface;
 use Pyz\Zed\Training\Dependency\Facade\TrainingToEventBridgeInterface;
 use Pyz\Zed\Training\TrainingDependencyProvider;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
@@ -29,11 +29,11 @@ class TrainingBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \Pyz\Zed\Training\Business\Model\Reader\TrainingPriceItemReaderInterface
+     * @return \Pyz\Zed\Training\Business\Model\Reader\PriceItemReaderInterface
      */
-    public function createPriceItemReader(): TrainingPriceItemReaderInterface
+    public function createPriceItemReader(): PriceItemReaderInterface
     {
-        return new TrainingPriceItemReader($this->getRepository());
+        return new PriceItemReader($this->getRepository());
     }
 
     /**
@@ -47,10 +47,10 @@ class TrainingBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriterInterface
+     * @return \Pyz\Zed\Training\Business\Model\Writer\PriceItemWriterInterface
      */
-    public function createPriceItemWriter(): TrainingPriceItemWriterInterface
+    public function createPriceItemWriter(): PriceItemWriterInterface
     {
-        return new TrainingPriceItemWriter($this->getEntityManager());
+        return new PriceItemWriter($this->getEntityManager());
     }
 }

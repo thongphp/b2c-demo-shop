@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class TrainingDataImportConsole extends Console
 {
-    private const COMMAND_NAME = 'training:data-import';
+    private const COMMAND_NAME = 'training:import';
     private const DESCRIPTION = 'Import data';
     private const ARGUMENT_PATH = 'path';
 

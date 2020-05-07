@@ -2,7 +2,7 @@
 
 namespace Pyz\Zed\Training\Communication\Plugin\Event\Subscriber;
 
-use Pyz\Zed\Training\Communication\Plugin\Event\Listener\TrainingEventBulkListener;
+use Pyz\Zed\Training\Communication\Plugin\Event\Listener\PriceItemEventBulkListener;
 use Pyz\Zed\Training\Dependency\TrainingEvents;
 use Spryker\Zed\Event\Dependency\EventCollectionInterface;
 use Spryker\Zed\Event\Dependency\Plugin\EventSubscriberInterface;
@@ -19,7 +19,7 @@ class TrainingEventSubscriber extends AbstractPlugin implements EventSubscriberI
     {
         $eventCollection->addListenerQueued(
             TrainingEvents::DATA_BULK_IMPORT,
-            new TrainingEventBulkListener()
+            new PriceItemEventBulkListener()
         );
 
         return $eventCollection;

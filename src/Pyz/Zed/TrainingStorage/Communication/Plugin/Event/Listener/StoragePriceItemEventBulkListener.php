@@ -8,7 +8,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 /**
  * @method \Pyz\Zed\TrainingStorage\Business\TrainingStorageFacadeInterface getFacade()
  */
-class TrainingStorageEventBulkListener extends AbstractPlugin implements EventBulkHandlerInterface
+class StoragePriceItemEventBulkListener extends AbstractPlugin implements EventBulkHandlerInterface
 {
     /**
      * @inheritDoc

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Pyz\Zed\TrainingStorage\Persistence;
 
@@ -7,15 +7,10 @@ use Generated\Shared\Transfer\TrainingStorageItemTransfer;
 interface TrainingStorageEntityManagerInterface
 {
     /**
-     * @param string $customerItemNumber
-     */
-    public function deleteEntitiesByCustomerItemNumber(string $customerItemNumber): void;
-
-    /**
      * @param \Generated\Shared\Transfer\TrainingStorageItemTransfer $storageItemTransfer
+     * @param bool $isSendingToQueue
      *
      * @return \Generated\Shared\Transfer\TrainingStorageItemTransfer
-     * @throws \Propel\Runtime\Exception\PropelException
      */
-    public function saveEntity(TrainingStorageItemTransfer $storageItemTransfer): TrainingStorageItemTransfer;
+    public function saveEntity(TrainingStorageItemTransfer $storageItemTransfer, bool $isSendingToQueue): TrainingStorageItemTransfer;
 }

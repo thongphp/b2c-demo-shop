@@ -2,7 +2,7 @@
 
 namespace Pyz\Zed\Training\Business\Model\Reader;
 
-interface TrainingPriceItemReaderInterface
+interface PriceItemReaderInterface
 {
     /**
      * @param string $customerNumber

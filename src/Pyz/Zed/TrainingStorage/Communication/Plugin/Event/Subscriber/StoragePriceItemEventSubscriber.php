@@ -3,12 +3,12 @@
 namespace Pyz\Zed\TrainingStorage\Communication\Plugin\Event\Subscriber;
 
 use Pyz\Shared\TrainingStorage\TrainingStorageEvents;
-use Pyz\Zed\TrainingStorage\Communication\Plugin\Event\Listener\TrainingStorageEventBulkListener;
+use Pyz\Zed\TrainingStorage\Communication\Plugin\Event\Listener\StoragePriceItemEventBulkListener;
 use Spryker\Zed\Event\Dependency\EventCollectionInterface;
 use Spryker\Zed\Event\Dependency\Plugin\EventSubscriberInterface;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 
-class TrainingStorageEventSubscriber extends AbstractPlugin implements EventSubscriberInterface
+class StoragePriceItemEventSubscriber extends AbstractPlugin implements EventSubscriberInterface
 {
     /**
      * @param \Spryker\Zed\Event\Dependency\EventCollectionInterface $eventCollection
@@ -19,7 +19,7 @@ class TrainingStorageEventSubscriber extends AbstractPlugin implements EventSubs
     {
         $eventCollection->addListenerQueued(
             TrainingStorageEvents::DATA_BULK_PUBLISH,
-            new TrainingStorageEventBulkListener()
+            new StoragePriceItemEventBulkListener()
         );
 
         return $eventCollection;

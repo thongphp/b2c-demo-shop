@@ -5,8 +5,8 @@
           name="zed" namespace="Orm\Zed\Training\Persistence"
           package="src.Orm.Zed.Training.Persistence">
     <table name="pyz_training_price_item" idMethod="native">
-        <column name="customer_number" type="VARCHAR" size="2" required="true" primaryKey="true" />
-        <column name="item_number" type="VARCHAR" size="2" required="true" primaryKey="true" />
+        <column name="customer_number" type="VARCHAR" size="4" required="true" primaryKey="true" />
+        <column name="item_number" type="VARCHAR" size="4" required="true" primaryKey="true" />
         <column name="quantity" type="INTEGER" required="true" primaryKey="true" />
         <column name="price" type="FLOAT" required="true" />
     </table>
