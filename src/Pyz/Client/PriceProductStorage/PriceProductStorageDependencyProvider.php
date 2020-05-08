@@ -7,6 +7,8 @@
 
 namespace Pyz\Client\PriceProductStorage;
 
+use Pyz\Client\Training\Plugin\PriceProductStorageExtension\PriceProductFilterExpanderPlugin;
+use Pyz\Client\Training\Plugin\PriceProductStorageExtension\PriceDimensionPlugin;
 use Spryker\Client\PriceProductStorage\PriceProductStorageDependencyProvider as SprykerPriceProductStorageDependencyProvider;
 use Spryker\Client\PriceProductVolume\Plugin\PriceProductStorageExtension\PriceProductVolumeExtractorPlugin;
 
@@ -20,5 +22,23 @@ class PriceProductStorageDependencyProvider extends SprykerPriceProductStorageDe
         return [
             new PriceProductVolumeExtractorPlugin(),
         ];
+    }
+
+    public function getPriceDimensionStorageReaderPlugins(): array
+    {
+        $priceDimensionStorageReaderPlugins = parent::getPriceDimensionStorageReaderPlugins();
+
+        $priceDimensionStorageReaderPlugins[] = new PriceDimensionPlugin();
+
+        return $priceDimensionStorageReaderPlugins;
+    }
+
+    protected function getPriceProductFilterExpanderPlugins(): array
+    {
+        $priceProductFilterExpanderPlugins = parent::getPriceProductFilterExpanderPlugins();
+
+        $priceProductFilterExpanderPlugins[] = new PriceProductFilterExpanderPlugin();
+
+        return $priceProductFilterExpanderPlugins;
     }
 }

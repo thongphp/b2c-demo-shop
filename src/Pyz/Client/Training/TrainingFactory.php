@@ -8,7 +8,12 @@ use Pyz\Client\Training\Dependency\Client\StorageClientBridgeInterface;
 use Pyz\Client\Training\Dependency\Service\SynchronizationServiceBridgeInterface;
 use Pyz\Client\Training\Storage\PriceItemStorageReader;
 use Pyz\Client\Training\Storage\PriceItemStorageReaderInterface;
+use Spryker\Client\Currency\CurrencyClientInterface;
 use Spryker\Client\Kernel\AbstractFactory;
+use Spryker\Client\Price\PriceClientInterface;
+use Spryker\Client\PriceProduct\PriceProductClientInterface;
+use Spryker\Client\PriceProductStorage\PriceProductStorageClientInterface;
+use Spryker\Client\ProductStorage\ProductStorageClientInterface;
 
 /**
  * @method \Pyz\Client\Training\TrainingConfig getConfig()
@@ -61,5 +66,30 @@ class TrainingFactory extends AbstractFactory
     public function getCustomerClient(): CustomerClientBridgeInterface
     {
         return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_CUSTOMER);
+    }
+
+    public function getPriceClient(): PriceClientInterface
+    {
+        return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_PRICE);
+    }
+
+    public function getCurrencyClient(): CurrencyClientInterface
+    {
+        return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_CURRENCY);
+    }
+
+    public function getPriceProductClient(): PriceProductClientInterface
+    {
+        return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_PRICE_PRODUCT);
+    }
+
+    public function getProductStorageClient(): ProductStorageClientInterface
+    {
+        return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_PRODUCT_STORAGE);
+    }
+
+    public function getPriceProductStorageClient(): PriceProductStorageClientInterface
+    {
+        return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_PRICE_PRODUCT_STORAGE);
     }
 }

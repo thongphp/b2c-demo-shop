@@ -14,6 +14,11 @@ class TrainingDependencyProvider extends AbstractDependencyProvider
     public const CLIENT_STORAGE = 'CLIENT_STORAGE';
     public const CLIENT_CART = 'CLIENT_CART';
     public const CLIENT_CUSTOMER = 'CLIENT_CUSTOMER';
+    public const CLIENT_PRICE = 'CLIENT_PRICE';
+    public const CLIENT_PRICE_PRODUCT = 'CLIENT_PRICE_PRODUCT';
+    public const CLIENT_CURRENCY = 'CLIENT_CURRENCY';
+    public const CLIENT_PRODUCT_STORAGE = 'CLIENT_PRODUCT_STORAGE';
+    public const CLIENT_PRICE_PRODUCT_STORAGE = 'CLIENT_PRICE_PRODUCT_STORAGE';
     public const SERVICE_SYNCHRONIZATION = 'SERVICE_SYNCHRONIZATION';
 
     /**
@@ -28,6 +33,11 @@ class TrainingDependencyProvider extends AbstractDependencyProvider
         $container = $this->addSynchronizationService($container);
         $container = $this->addCartClient($container);
         $container = $this->addCustomerClient($container);
+        $container = $this->addPriceClient($container);
+        $container = $this->addCurrencyClient($container);
+        $container = $this->addPriceProductClient($container);
+        $container = $this->addProductStorageClient($container);
+        $container = $this->addPriceProductStorageClient($container);
 
         return $container;
     }
@@ -83,6 +93,61 @@ class TrainingDependencyProvider extends AbstractDependencyProvider
     {
         $container[self::CLIENT_CUSTOMER] = function (Container $container) {
             return new CustomerClientBridge($container->getLocator()->customer()->client());
+        };
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Client\Kernel\Container $container
+     *
+     * @return \Spryker\Client\Kernel\Container
+     */
+    private function addPriceClient(Container $container): Container
+    {
+        $container[self::CLIENT_PRICE] = function (Container $container) {
+            return $container->getLocator()->price()->client();
+        };
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Client\Kernel\Container $container
+     *
+     * @return \Spryker\Client\Kernel\Container
+     */
+    private function addCurrencyClient(Container $container): Container
+    {
+        $container[self::CLIENT_CURRENCY] = function (Container $container) {
+            return $container->getLocator()->currency()->client();
+        };
+
+        return $container;
+    }
+
+    private function addPriceProductClient(Container $container): Container
+    {
+        $container[self::CLIENT_PRICE_PRODUCT] = function (Container $container) {
+            return $container->getLocator()->priceProduct()->client();
+        };
+
+        return $container;
+    }
+
+    private function addProductStorageClient(Container $container): Container
+    {
+        $container[self::CLIENT_PRODUCT_STORAGE] = function (Container $container) {
+            return $container->getLocator()->productStorage()->client();
+        };
+
+        return $container;
+    }
+
+    private function addPriceProductStorageClient(Container $container): Container
+    {
+        $container[self::CLIENT_PRICE_PRODUCT_STORAGE] = function (Container $container) {
+            return $container->getLocator()->priceProductStorage()->client();
         };
 
         return $container;
