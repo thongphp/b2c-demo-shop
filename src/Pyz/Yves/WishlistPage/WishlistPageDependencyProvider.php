@@ -7,6 +7,7 @@
 
 namespace Pyz\Yves\WishlistPage;
 
+use Pyz\Client\Training\Plugin\TrainingProductViewExpanderPlugin;
 use Spryker\Client\AvailabilityStorage\Plugin\ProductViewAvailabilityStorageExpanderPlugin;
 use Spryker\Client\PriceProductStorage\Plugin\ProductViewPriceExpanderPlugin;
 use Spryker\Client\ProductImageStorage\Plugin\ProductViewImageExpanderPlugin;
@@ -23,6 +24,7 @@ class WishlistPageDependencyProvider extends SprykerWishlistPageDependencyProvid
             new ProductViewPriceExpanderPlugin(),
             new ProductViewImageExpanderPlugin(),
             new ProductViewAvailabilityStorageExpanderPlugin(),
+            new TrainingProductViewExpanderPlugin(),
         ];
     }
 }

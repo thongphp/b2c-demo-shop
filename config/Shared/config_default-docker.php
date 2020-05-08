@@ -17,6 +17,7 @@ use Spryker\Shared\Customer\CustomerConstants;
 use Spryker\Shared\DocumentationGeneratorRestApi\DocumentationGeneratorRestApiConstants;
 use Spryker\Shared\DummyPayment\DummyPaymentConfig;
 use Spryker\Shared\ErrorHandler\ErrorHandlerConstants;
+use Spryker\Shared\ErrorHandler\ErrorRenderer\WebExceptionErrorRenderer;
 use Spryker\Shared\ErrorHandler\ErrorRenderer\WebHtmlErrorRenderer;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\EventBehavior\EventBehaviorConstants;
@@ -408,10 +409,10 @@ $config[CmsConstants::YVES_THEME] = $YVES_THEME;
 
 $config[ErrorHandlerConstants::DISPLAY_ERRORS] = true;
 $config[ErrorHandlerConstants::YVES_ERROR_PAGE] = APPLICATION_ROOT_DIR . '/public/Yves/errorpage/error.html';
-$config[ErrorHandlerConstants::ERROR_RENDERER] = WebHtmlErrorRenderer::class;
+$config[ErrorHandlerConstants::ERROR_RENDERER] = WebExceptionErrorRenderer::class;
 // Due to some deprecation notices we silence all deprecations for the time being
 // To only log e.g. deprecations instead of throwing exceptions here use
-//$config[ErrorHandlerConstants::ERROR_LEVEL] = E_ALL
+$config[ErrorHandlerConstants::ERROR_LEVEL] = E_ERROR;
 //$config[ErrorHandlerConstants::ERROR_LEVEL_LOG_ONLY] = E_DEPRECATED | E_USER_DEPRECATED;
 
 $config[KernelConstants::DEPENDENCY_INJECTOR_YVES] = [

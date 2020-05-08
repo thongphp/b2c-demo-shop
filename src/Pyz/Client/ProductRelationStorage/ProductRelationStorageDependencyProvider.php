@@ -7,6 +7,7 @@
 
 namespace Pyz\Client\ProductRelationStorage;
 
+use Pyz\Client\Training\Plugin\TrainingProductViewExpanderPlugin;
 use Spryker\Client\PriceProductStorage\Plugin\ProductViewPriceExpanderPlugin;
 use Spryker\Client\ProductImageStorage\Plugin\ProductViewImageExpanderPlugin;
 use Spryker\Client\ProductRelationStorage\ProductRelationStorageDependencyProvider as SprykerProductRelationStorageDependencyProvider;
@@ -21,6 +22,7 @@ class ProductRelationStorageDependencyProvider extends SprykerProductRelationSto
         return [
             new ProductViewPriceExpanderPlugin(),
             new ProductViewImageExpanderPlugin(),
+            new TrainingProductViewExpanderPlugin()
         ];
     }
 }
