@@ -2,6 +2,9 @@
 
 namespace Pyz\Client\Training;
 
+use Generated\Shared\Transfer\MoneyValueTransfer;
+use Generated\Shared\Transfer\PriceProductDimensionTransfer;
+use Generated\Shared\Transfer\PriceProductTransfer;
 use Generated\Shared\Transfer\ProductViewTransfer;
 use Generated\Shared\Transfer\TrainingStorageItemTransfer;
 use Pyz\Shared\Training\TrainingConstants;
@@ -20,7 +23,7 @@ class TrainingClient extends AbstractClient implements TrainingClientInterface
      * @return \Generated\Shared\Transfer\ProductViewTransfer
      * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    public function extendPrices(ProductViewTransfer $productViewTransfer, array $productData, string $localeName): ProductViewTransfer
+    public function extendsPricesForProductView(ProductViewTransfer $productViewTransfer, array $productData, string $localeName): ProductViewTransfer
     {
         $storageReader = $this->getFactory()
             ->getStorageReader();
@@ -45,8 +48,60 @@ class TrainingClient extends AbstractClient implements TrainingClientInterface
         }
 
         $productViewTransfer->setPrice($newPrice);
+        $productViewTransfer->getCurrentProductPrice();
 
         return $productViewTransfer;
+    }
+
+    /**
+     * @param int $idProductAbstract
+     *
+     * @return \Generated\Shared\Transfer\PriceProductTransfer[]
+     * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
+     */
+    public function extendPriceForProductAbstract(int $idProductAbstract): array
+    {
+        $storageReader = $this->getFactory()
+            ->getStorageReader();
+
+        $priceItemStorageTransfer = $storageReader->findData(
+            $this->getCustomerNumber(),
+            $idProductAbstract,
+            $this->getFactory()->getLocaleClient()->getCurrentLocale()
+        );
+
+        if (!$priceItemStorageTransfer) {
+            return [];
+        }
+
+        $priceProductTransfers = [];
+
+        $priceProductDimensionTransfer = new PriceProductDimensionTransfer();
+        $priceProductDimensionTransfer->setType(TrainingConstants::DEFAULT_PRICE_DIMENSION_NAME);
+        $priceProductDimensionTransfer->setName(TrainingConstants::DEFAULT_PRICE_DIMENSION_NAME);
+
+        $currencyTransfer = $this->getFactory()->getCurrencyClient()->getCurrent();
+
+        foreach ($priceItemStorageTransfer->getPrices() as $price) {
+            $newPrice = $price[TrainingConstants::DATA_PRICE_VALUE_KEY] * 100;
+
+            $moneyValueTransfer = new MoneyValueTransfer();
+            $moneyValueTransfer->setCurrency($currencyTransfer)
+                ->setNetAmount($newPrice)
+                ->setGrossAmount($newPrice);
+
+            $priceProductTransfer = new PriceProductTransfer();
+            $priceProductTransfer->setPriceTypeName('DEFAULT');
+            $priceProductTransfer->setPriceDimension($priceProductDimensionTransfer);
+            $priceProductTransfer->setIdProductAbstract($idProductAbstract);
+            $priceProductTransfer->setMoneyValue($moneyValueTransfer);
+            $quantity = $price[TrainingConstants::DATA_PRICE_QUANTITY_KEY] === 1 ? 0 : $price[TrainingConstants::DATA_PRICE_QUANTITY_KEY];
+            $priceProductTransfer->setVolumeQuantity($quantity);
+
+            $priceProductTransfers[] = $priceProductTransfer;
+        }
+
+        return $priceProductTransfers;
     }
 
     /**

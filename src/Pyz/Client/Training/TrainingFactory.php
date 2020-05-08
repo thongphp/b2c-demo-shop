@@ -2,18 +2,15 @@
 
 namespace Pyz\Client\Training;
 
-use Pyz\Client\Training\Dependency\Client\CartClientBridgeInterface;
-use Pyz\Client\Training\Dependency\Client\CustomerClientBridgeInterface;
-use Pyz\Client\Training\Dependency\Client\StorageClientBridgeInterface;
-use Pyz\Client\Training\Dependency\Service\SynchronizationServiceBridgeInterface;
 use Pyz\Client\Training\Storage\PriceItemStorageReader;
 use Pyz\Client\Training\Storage\PriceItemStorageReaderInterface;
+use Spryker\Client\Cart\CartClientInterface;
 use Spryker\Client\Currency\CurrencyClientInterface;
+use Spryker\Client\Customer\CustomerClientInterface;
 use Spryker\Client\Kernel\AbstractFactory;
-use Spryker\Client\Price\PriceClientInterface;
-use Spryker\Client\PriceProduct\PriceProductClientInterface;
-use Spryker\Client\PriceProductStorage\PriceProductStorageClientInterface;
-use Spryker\Client\ProductStorage\ProductStorageClientInterface;
+use Spryker\Client\Locale\LocaleClientInterface;
+use Spryker\Client\Storage\StorageClientInterface;
+use Spryker\Service\Synchronization\SynchronizationServiceInterface;
 
 /**
  * @method \Pyz\Client\Training\TrainingConfig getConfig()
@@ -33,63 +30,56 @@ class TrainingFactory extends AbstractFactory
     }
 
     /**
-     * @return \Pyz\Client\Training\Dependency\Client\StorageClientBridgeInterface
+     * @return \Spryker\Client\Storage\StorageClientInterface
      * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    private function getStorageClient(): StorageClientBridgeInterface
+    private function getStorageClient(): StorageClientInterface
     {
         return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_STORAGE);
     }
 
     /**
-     * @return \Pyz\Client\Training\Dependency\Service\SynchronizationServiceBridgeInterface
+     * @return \Spryker\Service\Synchronization\SynchronizationServiceInterface
      * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    private function getSynchronizationService(): SynchronizationServiceBridgeInterface
+    private function getSynchronizationService(): SynchronizationServiceInterface
     {
         return $this->getProvidedDependency(TrainingDependencyProvider::SERVICE_SYNCHRONIZATION);
     }
 
     /**
-     * @return \Pyz\Client\Training\Dependency\Client\CartClientBridgeInterface
+     * @return \Spryker\Client\Cart\CartClientInterface
      * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    public function getCartClient(): CartClientBridgeInterface
+    public function getCartClient(): CartClientInterface
     {
         return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_CART);
     }
 
     /**
-     * @return \Pyz\Client\Training\Dependency\Client\CustomerClientBridgeInterface
+     * @return \Spryker\Client\Customer\CustomerClientInterface
      * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    public function getCustomerClient(): CustomerClientBridgeInterface
+    public function getCustomerClient(): CustomerClientInterface
     {
         return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_CUSTOMER);
     }
 
-    public function getPriceClient(): PriceClientInterface
-    {
-        return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_PRICE);
-    }
-
+    /**
+     * @return \Spryker\Client\Currency\CurrencyClientInterface
+     * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
+     */
     public function getCurrencyClient(): CurrencyClientInterface
     {
         return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_CURRENCY);
     }
 
-    public function getPriceProductClient(): PriceProductClientInterface
+    /**
+     * @return \Spryker\Client\Locale\LocaleClientInterface
+     * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
+     */
+    public function getLocaleClient(): LocaleClientInterface
     {
-        return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_PRICE_PRODUCT);
-    }
-
-    public function getProductStorageClient(): ProductStorageClientInterface
-    {
-        return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_PRODUCT_STORAGE);
-    }
-
-    public function getPriceProductStorageClient(): PriceProductStorageClientInterface
-    {
-        return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_PRICE_PRODUCT_STORAGE);
+        return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_LOCALE);
     }
 }

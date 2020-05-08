@@ -16,5 +16,12 @@ interface TrainingClientInterface
      *
      * @return \Generated\Shared\Transfer\ProductViewTransfer
      */
-    public function extendPrices(ProductViewTransfer $productViewTransfer, array $productData, string $localeName): ProductViewTransfer;
+    public function extendsPricesForProductView(ProductViewTransfer $productViewTransfer, array $productData, string $localeName): ProductViewTransfer;
+
+    /**
+     * @param int $idProductAbstract
+     *
+     * @return \Generated\Shared\Transfer\PriceProductTransfer[]
+     */
+    public function extendPriceForProductAbstract(int $idProductAbstract): array;
 }

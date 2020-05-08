@@ -8,4 +8,6 @@ interface TrainingConstants
 
     public const DATA_PRICE_QUANTITY_KEY = 'quantity';
     public const DATA_PRICE_VALUE_KEY = 'value';
+
+    public const DEFAULT_PRICE_DIMENSION_NAME = 'PRICE_DIMENSION_DEFAULT_TRAINING';
 }

@@ -20,6 +20,6 @@ class ProductViewExpanderPlugin extends AbstractPlugin implements ProductViewExp
      */
     public function expandProductViewTransfer(ProductViewTransfer $productViewTransfer, array $productData, $localeName): ProductViewTransfer
     {
-        return $this->getClient()->extendPrices($productViewTransfer, $productData, $localeName);
+        return $this->getClient()->extendsPricesForProductView($productViewTransfer, $productData, $localeName);
     }
 }

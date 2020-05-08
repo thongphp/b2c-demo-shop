@@ -5,25 +5,21 @@ namespace Pyz\Client\Training\Storage;
 use Generated\Shared\Transfer\ProductViewTransfer;
 use Generated\Shared\Transfer\SynchronizationDataTransfer;
 use Generated\Shared\Transfer\TrainingStorageItemTransfer;
-use Pyz\Client\Training\Dependency\Client\StorageClientBridgeInterface;
-use Pyz\Client\Training\Dependency\Service\SynchronizationServiceBridgeInterface;
 use Pyz\Shared\Training\TrainingConstants;
+use Spryker\Client\Storage\StorageClientInterface;
+use Spryker\Service\Synchronization\SynchronizationServiceInterface;
 
 class PriceItemStorageReader implements PriceItemStorageReaderInterface
 {
-    /** @var \Pyz\Client\Training\Dependency\Client\StorageClientBridgeInterface */
+    /** @var \Spryker\Client\Storage\StorageClientInterface */
     private $storageClient;
 
-    /** @var \Pyz\Client\Training\Dependency\Service\SynchronizationServiceBridgeInterface */
+    /** @var \Spryker\Service\Synchronization\SynchronizationServiceInterface */
     private $synchronizationService;
 
-    /**
-     * @param \Pyz\Client\Training\Dependency\Client\StorageClientBridgeInterface $storageClient
-     * @param \Pyz\Client\Training\Dependency\Service\SynchronizationServiceBridgeInterface $synchronizationService
-     */
     public function __construct(
-        StorageClientBridgeInterface $storageClient,
-        SynchronizationServiceBridgeInterface $synchronizationService
+        StorageClientInterface $storageClient,
+        SynchronizationServiceInterface $synchronizationService
     ) {
         $this->storageClient = $storageClient;
         $this->synchronizationService = $synchronizationService;
