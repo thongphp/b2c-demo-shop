@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<database xmlns="spryker:schema-01"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="spryker:schema-01 https://static.spryker.com/schema-01.xsd"
+          name="zed" namespace="Orm\Zed\TrainingStorage\Persistence"
+          package="src.Orm.Zed.TrainingStorage.Persistence">
+    <table name="pyz_training_price_item_storage" idMethod="native">
+        <column name="fk_customer_item_number" type="varchar" size="9" primaryKey="true" />
+        <behavior name="synchronization">
+            <parameter name="resource" value="training" />
+            <parameter name="locale" value="true" />
+            <parameter name="key_suffix_column" value="fk_customer_item_number" />
+            <parameter name="queue_group" value="sync.storage.training" />
+        </behavior>
+        <behavior name="timestampable" />
+    </table>
+</database>

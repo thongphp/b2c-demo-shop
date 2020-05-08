@@ -4,7 +4,7 @@ namespace Pyz\Zed\Training\Business\Model\Reader;
 
 use Pyz\Zed\Training\Persistence\TrainingRepositoryInterface;
 
-class TrainingPriceItemReader implements TrainingPriceItemReaderInterface
+class PriceItemReader implements PriceItemReaderInterface
 {
     /** @var \Pyz\Zed\Training\Persistence\TrainingRepositoryInterface */
     private $repository;
@@ -26,13 +26,7 @@ class TrainingPriceItemReader implements TrainingPriceItemReaderInterface
      */
     public function findByCustomerNumber(string $customerNumber): array
     {
-        $entities = $this->repository->findByCustomerNumber($customerNumber);
-
-        if (null === $entities) {
-            return [];
-        }
-
-        return $entities;
+        return $this->repository->findByCustomerNumber($customerNumber);
     }
 
     /**
@@ -44,12 +38,6 @@ class TrainingPriceItemReader implements TrainingPriceItemReaderInterface
      */
     public function findByItemNumber(string $itemNumber): array
     {
-        $entities = $this->repository->findByItemNumber($itemNumber);
-
-        if (null === $entities) {
-            return [];
-        }
-
-        return $entities;
+        return $this->repository->findByItemNumber($itemNumber);
     }
 }

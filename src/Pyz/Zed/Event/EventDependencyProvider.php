@@ -8,6 +8,8 @@
 namespace Pyz\Zed\Event;
 
 use Pyz\Zed\ProductStorage\Communication\Plugin\Event\Subscriber\ProductStorageEventSubscriber;
+use Pyz\Zed\Training\Communication\Plugin\Event\Subscriber\TrainingEventSubscriber;
+use Pyz\Zed\TrainingStorage\Communication\Plugin\Event\Subscriber\StoragePriceItemEventSubscriber;
 use Spryker\Zed\AvailabilityNotification\Communication\Plugin\Event\Subscriber\AvailabilityNotificationSubscriber;
 use Spryker\Zed\AvailabilityStorage\Communication\Plugin\Event\Subscriber\AvailabilityStorageEventSubscriber;
 use Spryker\Zed\CategoryImageStorage\Communication\Plugin\Event\Subscriber\CategoryImageStorageEventSubscriber;
@@ -51,14 +53,6 @@ use Spryker\Zed\UrlStorage\Communication\Plugin\Event\Subscriber\UrlStorageEvent
 
 class EventDependencyProvider extends SprykerEventDependencyProvider
 {
-    /**
-     * @return \Spryker\Zed\Event\Dependency\EventCollectionInterface
-     */
-    public function getEventListenerCollection()
-    {
-        return parent::getEventListenerCollection();
-    }
-
     /**
      * @return \Spryker\Zed\Event\Dependency\EventSubscriberCollectionInterface
      */
@@ -116,6 +110,12 @@ class EventDependencyProvider extends SprykerEventDependencyProvider
         $eventSubscriberCollection->add(new ProductConcretePageSearchProductAbstractEventSubscriber());
         $eventSubscriberCollection->add(new ProductConcretePageSearchProductEventSubscriber());
         $eventSubscriberCollection->add(new ProductConcretePageSearchProductLocalizedAttributesEventSubscriber());
+
+        /**
+         * Training
+         */
+        $eventSubscriberCollection->add(new TrainingEventSubscriber());
+        $eventSubscriberCollection->add(new StoragePriceItemEventSubscriber());
 
         return $eventSubscriberCollection;
     }

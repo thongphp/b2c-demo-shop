@@ -14,7 +14,7 @@ class TrainingPriceItemWriterTest extends Unit
      */
     public function testSaveEntity(): void
     {
-        $writer = new \Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriter(new TrainingEntityManager());
+        $writer = new \Pyz\Zed\Training\Business\Model\Writer\PriceItemWriter(new TrainingEntityManager());
 
         $trainingPriceItemTransfer = new TrainingPriceItemTransfer();
         $trainingPriceItemTransfer->setCustomerNumber('99')

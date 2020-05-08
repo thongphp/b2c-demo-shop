@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class TrainingDataImportConsole extends Console
 {
-    private const COMMAND_NAME = 'training:data-import';
+    private const COMMAND_NAME = 'training:import';
     private const DESCRIPTION = 'Import data';
     private const ARGUMENT_PATH = 'path';
 
@@ -30,7 +30,9 @@ class TrainingDataImportConsole extends Console
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return int
+     *
      * @throws \Propel\Runtime\Exception\PropelException
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      * @throws \Spryker\Zed\Propel\Business\Exception\AmbiguousComparisonException
      */
     public function run(InputInterface $input, OutputInterface $output): int

@@ -4,7 +4,7 @@ namespace Pyz\Zed\Training\Business\Model\Writer;
 
 use Generated\Shared\Transfer\TrainingPriceItemTransfer;
 
-interface TrainingPriceItemWriterInterface
+interface PriceItemWriterInterface
 {
     /**
      * @param \Generated\Shared\Transfer\TrainingPriceItemTransfer $trainingPriceItemTransfer

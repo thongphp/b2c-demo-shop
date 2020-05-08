@@ -4,10 +4,12 @@ namespace Pyz\Zed\Training\Business;
 
 use Pyz\Zed\Training\Business\Model\Importer\JsonImporter;
 use Pyz\Zed\Training\Business\Model\Importer\JsonImporterInterface;
-use Pyz\Zed\Training\Business\Model\Reader\TrainingPriceItemReader;
-use Pyz\Zed\Training\Business\Model\Reader\TrainingPriceItemReaderInterface;
-use Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriter;
-use Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriterInterface;
+use Pyz\Zed\Training\Business\Model\Reader\PriceItemReader;
+use Pyz\Zed\Training\Business\Model\Reader\PriceItemReaderInterface;
+use Pyz\Zed\Training\Business\Model\Writer\PriceItemWriter;
+use Pyz\Zed\Training\Business\Model\Writer\PriceItemWriterInterface;
+use Pyz\Zed\Training\Dependency\Facade\TrainingToEventBridgeInterface;
+use Pyz\Zed\Training\TrainingDependencyProvider;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -18,25 +20,37 @@ class TrainingBusinessFactory extends AbstractBusinessFactory
 {
     /**
      * @return JsonImporterInterface
+     *
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function createDataImportFromJson(): JsonImporterInterface
     {
-        return new JsonImporter($this->createPriceItemWriter());
+        return new JsonImporter($this->getEventFacade());
     }
 
     /**
-     * @return \Pyz\Zed\Training\Business\Model\Writer\TrainingPriceItemWriterInterface
+     * @return \Pyz\Zed\Training\Business\Model\Reader\PriceItemReaderInterface
      */
-    private function createPriceItemWriter(): TrainingPriceItemWriterInterface
+    public function createPriceItemReader(): PriceItemReaderInterface
     {
-        return new TrainingPriceItemWriter($this->getEntityManager());
+        return new PriceItemReader($this->getRepository());
     }
 
     /**
-     * @return \Pyz\Zed\Training\Business\Model\Reader\TrainingPriceItemReaderInterface
+     * @return \Pyz\Zed\Training\Dependency\Facade\TrainingToEventBridgeInterface
+     *
+     * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    public function createPriceItemReader(): TrainingPriceItemReaderInterface
+    public function getEventFacade(): TrainingToEventBridgeInterface
     {
-        return new TrainingPriceItemReader($this->getRepository());
+        return $this->getProvidedDependency(TrainingDependencyProvider::FACADE_EVENT);
+    }
+
+    /**
+     * @return \Pyz\Zed\Training\Business\Model\Writer\PriceItemWriterInterface
+     */
+    public function createPriceItemWriter(): PriceItemWriterInterface
+    {
+        return new PriceItemWriter($this->getEntityManager());
     }
 }
