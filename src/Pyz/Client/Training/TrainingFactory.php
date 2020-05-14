@@ -2,6 +2,8 @@
 
 namespace Pyz\Client\Training;
 
+use Pyz\Client\Training\Model\CustomerPrice;
+use Pyz\Client\Training\Model\CustomerPriceInterface;
 use Pyz\Client\Training\Storage\PriceItemStorageReader;
 use Pyz\Client\Training\Storage\PriceItemStorageReaderInterface;
 use Spryker\Client\Cart\CartClientInterface;
@@ -18,10 +20,26 @@ use Spryker\Service\Synchronization\SynchronizationServiceInterface;
 class TrainingFactory extends AbstractFactory
 {
     /**
+     * @return CustomerPriceInterface
+     * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
+     */
+    public function getCustomerPrice(): CustomerPriceInterface
+    {
+        return new CustomerPrice(
+            $this->getStorageReader(),
+            $this->getCurrencyClient(),
+            $this->getLocaleClient(),
+            $this->getCustomerClient(),
+            $this->getCartClient(),
+            $this->getConfig()
+        );
+    }
+
+    /**
      * @return \Pyz\Client\Training\Storage\PriceItemStorageReaderInterface
      * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    public function getStorageReader(): PriceItemStorageReaderInterface
+    private function getStorageReader(): PriceItemStorageReaderInterface
     {
         return new PriceItemStorageReader(
             $this->getStorageClient(),
@@ -51,7 +69,7 @@ class TrainingFactory extends AbstractFactory
      * @return \Spryker\Client\Cart\CartClientInterface
      * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    public function getCartClient(): CartClientInterface
+    private function getCartClient(): CartClientInterface
     {
         return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_CART);
     }
@@ -60,7 +78,7 @@ class TrainingFactory extends AbstractFactory
      * @return \Spryker\Client\Customer\CustomerClientInterface
      * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    public function getCustomerClient(): CustomerClientInterface
+    private function getCustomerClient(): CustomerClientInterface
     {
         return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_CUSTOMER);
     }
@@ -69,7 +87,7 @@ class TrainingFactory extends AbstractFactory
      * @return \Spryker\Client\Currency\CurrencyClientInterface
      * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    public function getCurrencyClient(): CurrencyClientInterface
+    private function getCurrencyClient(): CurrencyClientInterface
     {
         return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_CURRENCY);
     }
@@ -78,7 +96,7 @@ class TrainingFactory extends AbstractFactory
      * @return \Spryker\Client\Locale\LocaleClientInterface
      * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    public function getLocaleClient(): LocaleClientInterface
+    private function getLocaleClient(): LocaleClientInterface
     {
         return $this->getProvidedDependency(TrainingDependencyProvider::CLIENT_LOCALE);
     }
