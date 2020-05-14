@@ -112,7 +112,6 @@ class CustomerPrice implements CustomerPriceInterface
      * @param string $localeName
      *
      * @return \Generated\Shared\Transfer\ProductViewTransfer
-     * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function extendsPricesForProductView(ProductViewTransfer $productViewTransfer, array $productData, string $localeName): ProductViewTransfer
     {
@@ -156,7 +155,6 @@ class CustomerPrice implements CustomerPriceInterface
      * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
      *
      * @return int|null
-     * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     private function getItemQuantityInCart(ProductViewTransfer $productViewTransfer): ?int
     {

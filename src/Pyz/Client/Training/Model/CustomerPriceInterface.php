@@ -19,7 +19,6 @@ interface CustomerPriceInterface
      * @param string $localeName
      *
      * @return \Generated\Shared\Transfer\ProductViewTransfer
-     * @throws \Spryker\Client\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
     public function extendsPricesForProductView(ProductViewTransfer $productViewTransfer, array $productData, string $localeName): ProductViewTransfer;
 }

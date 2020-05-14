@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Pyz\Client\Training\Plugin\PriceProductStorageExtension;
+namespace Pyz\Client\Training\Plugin\ProductStorageExtension;
 
 use Generated\Shared\Transfer\ProductViewTransfer;
 use Spryker\Client\Kernel\AbstractPlugin;
@@ -9,7 +9,7 @@ use Spryker\Client\ProductStorageExtension\Dependency\Plugin\ProductViewExpander
 /**
  * @method \Pyz\Client\Training\TrainingClientInterface getClient()
  */
-class ProductViewExpanderPlugin extends AbstractPlugin implements ProductViewExpanderPluginInterface
+class TrainingProductViewExpanderPluginProvider extends AbstractPlugin implements ProductViewExpanderPluginInterface
 {
     /**
      * @param \Generated\Shared\Transfer\ProductViewTransfer $productViewTransfer
