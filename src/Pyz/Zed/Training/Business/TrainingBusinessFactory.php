@@ -8,8 +8,8 @@ use Pyz\Zed\Training\Business\Model\Reader\PriceItemReader;
 use Pyz\Zed\Training\Business\Model\Reader\PriceItemReaderInterface;
 use Pyz\Zed\Training\Business\Model\Writer\PriceItemWriter;
 use Pyz\Zed\Training\Business\Model\Writer\PriceItemWriterInterface;
-use Pyz\Zed\Training\Dependency\Facade\TrainingToEventBridgeInterface;
 use Pyz\Zed\Training\TrainingDependencyProvider;
+use Spryker\Zed\Event\Business\EventFacadeInterface;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 
 /**
@@ -37,11 +37,11 @@ class TrainingBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \Pyz\Zed\Training\Dependency\Facade\TrainingToEventBridgeInterface
+     * @return \Spryker\Zed\Event\Business\EventFacadeInterface
      *
      * @throws \Spryker\Zed\Kernel\Exception\Container\ContainerKeyNotFoundException
      */
-    public function getEventFacade(): TrainingToEventBridgeInterface
+    public function getEventFacade(): EventFacadeInterface
     {
         return $this->getProvidedDependency(TrainingDependencyProvider::FACADE_EVENT);
     }

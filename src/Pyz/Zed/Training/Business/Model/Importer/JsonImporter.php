@@ -4,20 +4,18 @@ namespace Pyz\Zed\Training\Business\Model\Importer;
 
 use Generated\Shared\Transfer\TrainingPriceItemTransfer;
 use Pyz\Shared\TrainingStorage\TrainingStorageEvents;
-use Pyz\Zed\Training\Dependency\Facade\TrainingToEventBridgeInterface;
 use Pyz\Zed\Training\Dependency\TrainingEvents;
+use Spryker\Zed\Event\Business\EventFacadeInterface;
 
 class JsonImporter implements JsonImporterInterface
 {
-    /** @var \Pyz\Zed\Training\Dependency\Facade\TrainingToEventBridgeInterface */
+    /** @var \Spryker\Zed\Event\Business\EventFacadeInterface */
     private $eventFacade;
 
     /**
-     * JsonImporter constructor.
-     *
-     * @param \Pyz\Zed\Training\Dependency\Facade\TrainingToEventBridgeInterface $eventFacade
+     * @param \Spryker\Zed\Event\Business\EventFacadeInterface $eventFacade
      */
-    public function __construct(TrainingToEventBridgeInterface $eventFacade)
+    public function __construct(EventFacadeInterface $eventFacade)
     {
         $this->eventFacade = $eventFacade;
     }
